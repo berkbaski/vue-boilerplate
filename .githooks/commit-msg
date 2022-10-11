@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+input_file=$1
+commit_message=$(cat ${input_file})
+valid_commit_regex="^([A-Z]+-[0-9]+): [A-Z][-a-z0-9 ]+$"
+error_message="Bad commit message, see example PRJ-123: Add a new feature"
+
+if [[ ! $commit_message =~ $valid_commit_regex ]]
+  then
+    echo $error_message
+    exit 1
+  fi
+exit 0
